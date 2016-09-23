@@ -12,13 +12,16 @@ public class MainActivity extends AppCompatActivity {
     int d = 1;
     int f = 0;
     int i = 0;
+    TextView second;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        second = (TextView)findViewById(R.id.secondaryText);
+        script();
     }
-    Floorzero send = new Floorzero();
+
+    Floor send = new Floorzero();
 
     public void script(){
         TextView textview = (TextView)findViewById(R.id.textView);
@@ -31,42 +34,53 @@ public class MainActivity extends AppCompatActivity {
         groundView.setText(can);
     }
 
+    public void advance(){
+        f++;
+        i = 0;
+        if (f == 1){
+            send = new Floorone();
+        }
+
+    }
 
 
-    public void move(int c){
-        if (f == 0){
+
+    public void move(){
 
                 switch (send.move(x, y, d, i)){
                     case "f":
-                        f++;
+                        advance();
+                        second.setText("You advance to the next floor");
                         break;
                     case "x":
                         x++;
+                        second.setText("You move forward");
                         break;
                     case "x-":
                         x--;
+                        second.setText("You move forward");
                         break;
                     case "y":
                         y++;
+                        second.setText("You move forward");
                         break;
                     case "y-":
                         y--;
+                        second.setText("You move forward");
                         break;
                 }
 
-        }
-    }
 
+
+    }
 
     public void up(View v){
         if (v instanceof Button){
-            //Button b = (Button) v;
-
-            move(1);
+               move();
             script();
-
         }
     }
+
     public void right(View v){
         if (v instanceof Button){
             //Button b = (Button) v;
@@ -102,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1 :
                     i = 1;
                     b.setText("Torch");
+                    second.setText("You Pickup the torch and the room lights up");
                     break;
 
             }
@@ -109,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             send.ground(x,y,i);
             i = 0;
             b.setText("pickup");
+            second.setText("You drop your item on the ground");
         }
         }
         script();

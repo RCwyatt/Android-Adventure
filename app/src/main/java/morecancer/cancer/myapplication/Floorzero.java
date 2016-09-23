@@ -5,15 +5,14 @@ import java.util.ArrayList;
 /**
  * Created by Rylan on 2016-09-13.
  */
-public class Floorzero {
+public class Floorzero extends Floor{
 
-    String[][][][] sauce;
 
-    int xi = -1;
-    int yi = -1;
-    int gi = 0;
+
+
 
     public Floorzero(){
+        super(-1, -1, 0, 1);
         sauce = new String[1][1][4][2];
         sauce[0][0][0][0] = "You're in a dark room, you can faintly see a wall in front of you with an arrow pointing to the right painted on it";
         sauce[0][0][1][0] = "You can see a wall with an an arrow pointing up painted on it";
@@ -39,35 +38,20 @@ public class Floorzero {
     }
 
     public int pickup(int x,int y,int d){
-        if (x == 1 && y == 1 && d == 3){
+        if (x == 1 && y == 1 && d == 3 && scone == 1){
+            sauce [0][0][2][0] = "You can see an empty scone";
+            scone = 0;
             return 1;
         } else if (xi == x && yi == y){
-            return gi;
+            int temp = gi;
+            gi = 0;
+            return temp;
         } else {
             return 0;
         }
     }
 
-    public void ground(int x, int y, int i){
-        xi = x;
-        yi = y;
-        gi = i;
-    }
 
-    public String look(int x,int y,int d, int i){
-
-        return sauce [x - 1][y - 1][d - 1][i];
-    }
-
-    public String groundLook(int x, int y) {
-        if (x == xi && y == yi) if (gi == 1) {
-            return "There is a torch on the ground";
-        }
-
-            return "";
-
-
-    }
 
 
 
