@@ -37,6 +37,9 @@ public abstract class Floor {
     public String groundLook(int x, int y) {
         if (x == xi && y == yi) if (gi == 1) {
             return "There is a torch on the ground";
+        } else if (x == xi && y == yi && gi == 2){
+            return "There is a box on the ground";
+
         }
 
             return "";
